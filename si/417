@@ -1,0 +1,45 @@
+import string
+
+translation_dict = dict([('a', '.-'), ('b', '-...'), ('c', '-.-.'), ('d', '-..'), ('e', '.'), ('f', '..-.'), ('g', '--.'), ('h', '....'), ('i', '..'), ('j', '.---'), ('k', '-.-'), ('l', '.-..'), ('m', '--'), ('n', '-.'), ('o', '---'), ('p', '.--.'), ('q', '--.-'), ('r', '.-.'), ('s', '...'), ('t', '-'), ('u', '..-'), ('v', '...-'), ('w', '.--'), ('x', '-..-'), ('y', '-.--'), ('z', '--..'), (' ', ''), ('/', '-..-.'), ('-', '-....-'), ('.', '.-.-.-'), (',', '--..--'), (' ', ''), ("1", ".----"), ("2", "..---"), ("3", "...--"), ("4", "....-"), ("5", "....."), ("6", "-...."), ("7", "--..."), ("8", "---.."), ("9", "----."), ("0", "-----")])
+
+alphabet = {}
+morse = {}
+
+for key, value in translation_dict.items():
+    alphabet[key] = value
+    #print("alpha key: " + str(alphabet[key]))
+    morse[value] = key
+    #print("morse value: " + str(morse[value]))
+#print(alphabet)
+#print(morse)
+
+def encode(plaintext: str) -> str:
+    plaintext = plaintext.lower()
+    morse_text = ""
+    for char in plaintext:
+        #print("char text code: " + char)
+        morse_text += alphabet[char] + "/"
+    morse_text += "//"
+    return morse_text
+
+def decode(morse_text: str) -> str:
+    morse_array = morse_text.split("/")
+    plain_text = ""
+    #print("dlzka morse array: " + str(len(morse_array)))
+    for i in range(len(morse_array)):
+        #print("i je: " + str(i))
+        #print("current element: " + morse_array[i])
+        current_element = morse_array[i]
+        #print("added elem: " + morse[current_element])
+        plain_text += morse[current_element]
+    #print("[.] plain test bez slicu: " + plain_text)
+    plain_text = plain_text[:-3]
+    return plain_text
+
+#print("Test" + alphabet["t"])
+print(encode("Najit vsechny bugy je casto problem"))
+print(decode(encode("Najit vsechny bugy je casto problem")))
+print(encode("Uspet neni lehke, ale je to sladka tecka."))
+print(decode(encode("Uspet neni lehke, ale je to sladka tecka.")))
+print(decode(encode("Do translation dict jsou pridany vsechny specialni znaky a cisla, ktera budete potrebovat. To stejne nerikam o malych pismenech.")))
+print(encode("ab c")) # .-/-...//-.-.///
