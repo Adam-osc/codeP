@@ -1,6 +1,6 @@
 def encode(n: int, plain_text: str) -> str:  # vraci ciphertext typu String
     pocet = len(plain_text) // n
-    print("Pocet je: " + str(pocet))
+    #print("Pocet je: " + str(pocet))
     l_velk = len(plain_text) % n
 
     cast = ""
@@ -11,7 +11,7 @@ def encode(n: int, plain_text: str) -> str:  # vraci ciphertext typu String
     idx = 0
     while idx <= pocet - 1:
         for i in range((0 + (idx * n)), ((idx * n) + n)):
-            print("toto je i: " + str(i))
+            #print("toto je i: " + str(i))
             cast += plain_text[i]
 
         casti.append(cast)
@@ -24,7 +24,7 @@ def encode(n: int, plain_text: str) -> str:  # vraci ciphertext typu String
 
     casti.append(cast)
 
-    print(casti)
+    #print(casti)
 
     for j, pole in enumerate(casti):
 
@@ -32,13 +32,13 @@ def encode(n: int, plain_text: str) -> str:  # vraci ciphertext typu String
         encdd += casti[j]
         j += 1
 
-    print("Encodnute: " + encdd)
+    #print("Encodnute: " + encdd)
     return encdd
 
 
 def decode(n: int, cipher_text: str) -> str:  # vraci plaintext typu String
     pocet = len(cipher_text) // n
-    print("Pocet je: " + str(pocet))
+    #print("Pocet je: " + str(pocet))
     l_velk = len(cipher_text) % n
 
     cast = ""
@@ -49,7 +49,7 @@ def decode(n: int, cipher_text: str) -> str:  # vraci plaintext typu String
     idx = 0
     while idx <= pocet - 1:
         for i in range((0 + (idx * n)), ((idx * n) + n)):
-            print("toto je i: " + str(i))
+            #print("toto je i: " + str(i))
             cast += cipher_text[i]
 
         casti.append(cast)
@@ -62,14 +62,14 @@ def decode(n: int, cipher_text: str) -> str:  # vraci plaintext typu String
 
     casti.append(cast)
 
-    print(casti)
+    #print(casti)
 
     for j, pole in enumerate(casti):
         casti[j] = pole[::-1]
         decdd += casti[j]
         j += 1
 
-    print("Decodnute: " + decdd)
+    #print("Decodnute: " + decdd)
     return decdd
 
 
