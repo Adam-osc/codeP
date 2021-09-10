@@ -3,7 +3,7 @@ julie = Turtle()
 p_uhlov = 3
 max_uhlov = 9
 
-for j in range(p_uhlov, max_uhlov+1):
+for j in range(p_uhlov, max_uhlov + 1):
     print(j)
     print(360 / j)
     for i in range(j):
