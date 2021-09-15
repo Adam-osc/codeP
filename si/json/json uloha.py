@@ -44,4 +44,4 @@ def load_memes(fileName: str) -> List[Meme]:
 def analyze_memes(fileName: str) -> Tuple[str, str, str]:
     return ("", "", "")
 
-load_memes("//root/codeP//si//Json/memese.json")
+load_memes("si//json//memese.json")
