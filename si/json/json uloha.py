@@ -118,5 +118,5 @@ def analyze_memes(fileName: str) -> Tuple[str, str, str]:
 #get_best_meme_from_sub(load_memes("si//json//memese.json"),
                        #get_all_subreddits(
                            #load_memes("si//json//memese.json"))["subreddit"])
-                  
+
 analyze_memes("si//json//memese.json")
