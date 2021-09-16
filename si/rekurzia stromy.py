@@ -12,11 +12,17 @@ def draw_tree(turtle: Turtle, length: int, min_length: int) -> None:
     """
 
     # Upravuj iba kód POD týmto komentárom
-    turtle.forward(length)
-
-    while length >= min_length:
-        return None
-
+    if length >= min_length:
+        turtle.forward(length)
+        turtle.left(30)
+        draw_tree(turtle, ((2 * length) / 3), min_length)
+        turtle.right(60)
+        draw_tree(turtle, ((2 * length) / 3), min_length)
+        turtle.left(30)
+        turtle.backward(length)
+    else:
+        return
+    return
 
 
 pass
@@ -33,4 +39,4 @@ julie.lt(90)
 draw_tree(julie, 120, 20)
 
 # Strom, na ktorom sa testuje
-# draw_tree(julie, 120, 5) # NEZABUDNI PRED ODOVZDANÍM ODKOMENTOVAŤ!
+draw_tree(julie, 120, 5)  # NEZABUDNI PRED ODOVZDANÍM ODKOMENTOVAŤ!
