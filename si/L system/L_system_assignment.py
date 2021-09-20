@@ -66,9 +66,9 @@ class L_builder:
         for char in axiom:
             if char in self.__system.terminal_rules:
                 editable += self.__system.terminal_rules[char]
-        axiom = editable
+        self.axiom = editable
         print("Terminal axiom")
-        print(axiom)
+        print(self.axiom)
 
         pass  # TODO (Almost done)
 
@@ -92,14 +92,39 @@ class L_drawer:
         pen = turtle.Turtle()
 
         # TODO add code for starting position
-
         turtle.tracer(0, 0)  # stop the drawing animation
+        pen.penup()
+        pen.setpos(self.startPos)
+        pen.pendown()
 
         # TODO add drawing code
+        print("This is the axiom to be drawn: ")
+        print(self.__axiom)
+
+        idx = 0
+        while idx < len(self.__axiom):
+            print("This is idx: " + str(idx))
+            print("this is the code: " + self.__axiom[idx])
+            if self.__axiom[idx] == "f":
+                pen.forward(self.__distance)
+                idx += 1
+
+            elif self.__axiom[idx] == "b":
+                pen.backward(self.__distance)
+                idx += 1
+
+            elif self.__axiom[idx] == "r":
+                pen.right(int(self.__axiom[idx+1:idx+4]))
+                idx += 4
+
+            elif self.__axiom[idx] == "l":
+                pen.left(int(self.__axiom[idx+1:idx+4]))
+                idx += 4
+
         turtle.update()  # show the drawing
         # uncomment if you want to see the drawing
         # keep commented in submision file
-        # wn.mainloop()
+        wn.mainloop()
         pen.clear()  # clear previous drawing from canvas [for automated tests]
 
 
@@ -148,7 +173,7 @@ def test_koch(depth):
 
     drawer = L_drawer(axiom, system.distance, (-250, -200), 0)
     # enable drawing for testing, but submit without it !!!!
-    # drawer.draw_L_system()
+    drawer.draw_L_system()
 
     return axiom
 
