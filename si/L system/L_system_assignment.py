@@ -53,13 +53,24 @@ class L_builder:
         editable = ""
         axiom = L_builder.axiom
 
-        for times in range(1,iterations):
+        for times in range(1, iterations):
             for char in axiom:
                 if char in self.__system.expansion_rules:
                     editable += self.__system.expansion_rules[char]
             axiom = editable
+        print("Non-terminal axiom")
         print(axiom)
-        pass  # TODO
+
+        editable = ""
+
+        for char in axiom:
+            if char in self.__system.terminal_rules:
+                editable += self.__system.terminal_rules[char]
+        axiom = editable
+        print("Terminal axiom")
+        print(axiom)
+
+        pass  # TODO (Almost done)
 
     def get_axiom(self):
         return self.axiom
@@ -72,8 +83,8 @@ class L_drawer:
     def __init__(self, axiom, distance, startPos, startAngle):
         self.__axiom = axiom
         self.__distance = distance  # distance for turtle forward / backward
-        self.startPos = startPos  # initial angle
-        self.startAngle = startAngle  # initial position of turtle
+        self.startPos = startPos  # initial position of turtle
+        self.startAngle = startAngle  # initial angle
 
     # do not change the head of the function
     def draw_L_system(self):
@@ -85,7 +96,6 @@ class L_drawer:
         turtle.tracer(0, 0)  # stop the drawing animation
 
         # TODO add drawing code
-
         turtle.update()  # show the drawing
         # uncomment if you want to see the drawing
         # keep commented in submision file
