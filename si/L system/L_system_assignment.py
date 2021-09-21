@@ -94,6 +94,10 @@ class L_drawer:
         # TODO add code for starting position
         turtle.tracer(0, 0)  # stop the drawing animation
         pen.penup()
+
+        if self.startAngle == 0:
+            pass
+
         pen.setpos(self.startPos)
         pen.pendown()
 
