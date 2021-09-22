@@ -393,7 +393,19 @@ def line_recursive(depth):
 
 # TODO, recursive function that creates Koch Curve
 def koch_curve_recursive(depth):
-    pass
+    if depth <= 1:
+        return "f"
+    else:
+        s = koch_curve_recursive(depth-1)
+        s += "l045"
+        s += koch_curve_recursive(depth-1)
+        s += "r045r045"
+        s += koch_curve_recursive(depth-1)
+        s += "l045"
+        s += koch_curve_recursive(depth-1)
+
+    print("[.] Koch recursive: " + "\n" + s)
+    return s
 
 
 # TODO, recursive function that creates Sierpinsky triangle
@@ -532,8 +544,7 @@ def basic_tests():
     # Recursion tasks
     # assert line_recursive(6) == "ffffffffffffffffffffffffffffffff"
 
-    # assert koch_curve_recursive(3) == """fl045fr045r045fl045fl045fl045fr045r045
-    # fl045fr045r045fl045fr045r045fl045fl045fl045fr045r045fl045f"""
+    assert koch_curve_recursive(3) == """fl045fr045r045fl045fl045fl045fr045r045fl045fr045r045fl045fr045r045fl045fl045fl045fr045r045fl045f"""
 
     # assert sierpinsky_triangle_recursive(3) == """fl120fr120fr120fl120fl120ffr1
     # 20fl120fr120fr120fl120fr120ffl120fl120fr120fr120fl120fl120ffffl120ffff"""
