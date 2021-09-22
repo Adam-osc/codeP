@@ -53,10 +53,20 @@ class L_builder:
         editable = ""
         axiom = L_builder.axiom
 
-        for times in range(1, iterations):
+        for times in range(0, iterations):
+            editable = ""
             for char in axiom:
                 if char in self.__system.expansion_rules:
-                    editable += self.__system.expansion_rules[char]
+                    print("Nonterminal choice: ")
+                    print(self.__system.expansion_rules[char])
+
+                    if type(self.__system.expansion_rules[char]) is list:
+                        editable += random.choice(self.__system.expansion_rules[char])
+
+                    else:
+                        editable += self.__system.expansion_rules[char]
+                else:
+                    editable += char
             axiom = editable
         print("Non-terminal axiom")
         print(axiom)
@@ -65,10 +75,12 @@ class L_builder:
 
         for char in axiom:
             if char in self.__system.terminal_rules:
-                editable += self.__system.terminal_rules[char]
+                # print("Toto pridavame: " + self.__system.terminal_rules[char])
+                editable += (self.__system.terminal_rules[char])
+
         self.axiom = editable
         print("Terminal axiom")
-        print(self.axiom)
+        # print(self.axiom)
 
         pass  # TODO (Almost done)
 
@@ -95,17 +107,23 @@ class L_drawer:
         turtle.tracer(0, 0)  # stop the drawing animation
         pen.penup()
         pen.setpos(self.startPos)
+        pen.setheading(self.startAngle)
         pen.pendown()
 
         # TODO add drawing code
         print("This is the axiom to be drawn: ")
-        print(self.__axiom)
+        # print(self.__axiom)
 
         idx = 0
+        pos_stack = []
         while idx < len(self.__axiom):
+
             print("This is idx: " + str(idx))
             print("this is the code: " + self.__axiom[idx])
-            if self.__axiom[idx] == "f":
+            if self.__axiom[idx] == "u":
+                idx += 1
+
+            elif self.__axiom[idx] == "f":
                 pen.forward(self.__distance)
                 idx += 1
 
@@ -114,12 +132,43 @@ class L_drawer:
                 idx += 1
 
             elif self.__axiom[idx] == "r":
-                pen.right(int(self.__axiom[idx+1:idx+4]))
-                idx += 4
+                print("[.] Som v pravom")
+                angle = ""
+                idx += 1
+                print(self.__axiom[idx])
+
+                while idx < len(self.__axiom):
+                    if (self.__axiom[idx].isnumeric() is True) or (self.__axiom[idx] == "."):
+                        print(self.__axiom[idx])
+                        angle += self.__axiom[idx]
+                        idx += 1
+                    else:
+                        break
+                pen.right(float(angle))
+                idx += 1
 
             elif self.__axiom[idx] == "l":
-                pen.left(int(self.__axiom[idx+1:idx+4]))
-                idx += 4
+                angle = ""
+                idx += 1
+                print(self.__axiom)
+                while idx < len(self.__axiom[idx]):
+                    if (self.__axiom[idx].isnumeric() is True) or (self.__axiom[idx] == "."):
+                        angle += self.__axiom[idx]
+                        idx += 1
+                    else:
+                        break
+                pen.left(float(angle))
+                idx += 1
+
+            elif self.__axiom[idx] == "[":
+                pos_stack.append([pen.pos(), pen.heading()])
+                idx += 1
+
+            elif self.__axiom[idx] == "]":
+                pen.setpos(pos_stack[-1][0])
+                pen.setheading(pos_stack[-1][1])
+                pos_stack.pop()
+                idx += 1
 
         turtle.update()  # show the drawing
         # uncomment if you want to see the drawing
@@ -201,7 +250,7 @@ def test_sierpinsky_triangle(depth):
 
     drawer = L_drawer(axiom, system.distance, (-300, -340), 0)
     # enable drawing for testing, but submit without it !!!!
-    # drawer.draw_L_system()
+    drawer.draw_L_system()
 
     return axiom
 
@@ -232,7 +281,7 @@ def test_barley_deterministic(depth):
 
     drawer = L_drawer(axiom, system.distance, (-300, 300), 45)
     # enable drawing for testing, but submit without it !!!!
-    # drawer.draw_L_system()
+    drawer.draw_L_system()
 
     return axiom
 
@@ -265,7 +314,7 @@ def test_barley_non_deterministic(depth, seed):
 
     drawer = L_drawer(axiom, system.distance, (-300, -340), 90)
     # enable drawing for testing, but submit without it !!!!
-    # drawer.draw_L_system()
+    drawer.draw_L_system()
 
     return axiom
 
@@ -487,10 +536,10 @@ def basic_tests():
 
 if __name__ == "__main__":
     # line_recursive(6)
-    test_koch(5)
+    # test_koch(5)
     # test_sierpinsky_triangle(3)
     # test_barley_deterministic(6)
-    # test_barley_non_deterministic(2, 5)
+    test_barley_non_deterministic(2, 5)
     # test_harder_recursive(6)
     # test_harder_recursive(3)
     # basic_tests()
