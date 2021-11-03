@@ -37,6 +37,16 @@ def k_bro(array):
             return
 
 
+def bet_attempt(array):
+    i = 0
+    while i < (len(array)-1):
+        for j in range(6):
+            if array[i] != 69:
+                i += 1
+            else:
+                return i
+
+
 # basic(Array)
-basic(Array)
+bet_attempt(Array)
 print("--- %s seconds ---" % (time.time() - start_time))

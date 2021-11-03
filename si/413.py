@@ -12,15 +12,15 @@ def word_frequency(text_nas):
                 if word not in points:
                     points[word] = 1
                     word = ""
-                else:    
+                else:
                     points[word] += 1
-                    word = ""  
-    
+                    word = ""
+
     if word != "":
         if word not in points:
             points[word] = 1
             word = ""
-        else:    
+        else:
             points[word] += 1
             word = ""
 
